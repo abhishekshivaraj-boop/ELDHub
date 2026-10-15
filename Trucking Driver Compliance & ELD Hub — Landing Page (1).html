@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trucking Driver Compliance & ELD Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--bg2:#f8f9fb;--ink:#111827;--mut:#6b7280;--red:#b91c1c;--redsoft:#fdf0f0;--line:#e5e7eb;--card:#fff;--foot:#c0392b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1115;--bg2:#161a20;--ink:#f3f4f6;--mut:#9ca3af;--red:#ef4444;--redsoft:#2a1717;--line:#2a2f38;--card:#1b2027;--foot:#7f1d1d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1115;--bg2:#161a20;--ink:#f3f4f6;--mut:#9ca3af;--red:#ef4444;--redsoft:#2a1717;--line:#2a2f38;--card:#1b2027;--foot:#7f1d1d;color-scheme:dark}
+html{scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{max-width:1100px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem}
+.mark{width:36px;height:36px;border-radius:8px;background:var(--red);color:#fff;display:grid;place-items:center;font-family:Georgia,serif;font-size:.95rem}
+nav{display:flex;gap:22px;font-weight:500;color:var(--mut)}nav a:hover{color:var(--ink)}
+.btn{display:inline-block;border-radius:999px;padding:13px 26px;font-weight:600;font-family:inherit;font-size:1rem;border:1px solid var(--red);background:var(--red);color:#fff;cursor:pointer}
+.btn.o{background:var(--bg);color:var(--ink);border-color:var(--line)}
+.btn:hover{filter:brightness(1.08)}
+.hero{text-align:center;padding:64px 20px 40px;max-width:900px;margin:auto}
+.pill{display:inline-block;border:2px solid var(--red);color:var(--red);border-radius:999px;padding:8px 20px;font-weight:600;font-size:.85rem;letter-spacing:.02em}
+h1{font-size:clamp(2rem,5.5vw,3.4rem);line-height:1.15;margin:28px 0 20px;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--red)}
+.lead{color:var(--mut);font-size:1.1rem;max-width:660px;margin:0 auto 32px}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.mock{max-width:860px;margin:48px auto 0;border-radius:22px;background:#15171b;padding:10px;box-shadow:0 20px 50px rgba(0,0,0,.18);text-align:left}
+.dots{display:flex;gap:7px;padding:6px 10px 10px}.dots i{width:11px;height:11px;border-radius:50%;display:block}
+.screen{background:var(--card);border-radius:12px;display:grid;grid-template-columns:150px 1fr;min-height:330px;overflow:hidden}
+.side{border-right:1px solid var(--line);padding:16px 12px;font-size:.8rem;display:flex;flex-direction:column;gap:6px}
+.side b{background:var(--red);color:#fff;border-radius:8px;padding:8px 10px;font-weight:600}.side span{padding:8px 10px;color:var(--mut)}
+.main{padding:18px}
+.main h3{margin:0 0 14px;text-align:center;font-size:.95rem}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:12px 6px;text-align:center}
+.kpi strong{display:block;font-size:1.4rem}.kpi small{color:var(--mut);font-size:.7rem}
+.tbl{margin-top:14px;border:1px solid var(--line);border-radius:12px;overflow:auto}
+.row{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px;padding:9px 12px;font-size:.78rem;border-top:1px solid var(--line);min-width:340px}
+.row:first-child{border:0;color:var(--mut);font-weight:600}
+.tag{justify-self:start;border-radius:999px;padding:1px 10px;font-weight:600;font-size:.72rem}
+.t-r{background:#fee2e2;color:#991b1b}.t-a{background:#fef3c7;color:#92400e}.t-g{background:#dcfce7;color:#166534}
+.note{font-size:.72rem;color:var(--mut);text-align:center;margin:10px 0 0}
+section{padding:72px 20px}.alt{background:var(--bg2)}
+.wrap{max-width:1100px;margin:auto}
+h2{font-size:clamp(1.6rem,3.5vw,2.3rem);line-height:1.2;margin:0 0 14px;letter-spacing:-.01em;text-align:center}
+.sub{color:var(--mut);text-align:center;max-width:680px;margin:0 auto 48px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:36px 28px}
+.f{text-align:center}
+.ic{width:68px;height:68px;border-radius:50%;background:var(--redsoft);color:var(--red);display:grid;place-items:center;margin:0 auto 16px}
+.f h3{margin:0 0 8px;font-size:1.15rem}.f p{margin:0;color:var(--mut)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin-top:8px}
+.stats strong{display:block;color:var(--red);font-size:3rem;line-height:1.1}.stats b{display:block}.stats span{color:var(--mut)}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.role{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.role h3{margin:0 0 6px}.role p{margin:0;color:var(--mut)}
+.scope{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.scope div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.scope h3{margin:0 0 10px}.scope ul{margin:0;padding-left:20px;color:var(--mut)}
+.phases{max-width:700px;margin:auto;padding:0;list-style:none;counter-reset:p}
+.phases li{counter-increment:p;display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.phases li::before{content:counter(p);flex:none;width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700}
+.phases b{display:block}.phases span{color:var(--mut)}
+.faq{max-width:760px;margin:auto}
+details{border-bottom:1px solid var(--line);padding:16px 0}summary{font-weight:600;cursor:pointer}details p{color:var(--mut);margin:10px 0 0}
+footer{background:var(--foot);color:#fff;padding:56px 20px 28px}
+.news{background:var(--card);color:var(--ink);border-radius:24px;padding:32px 20px;text-align:center;max-width:720px;margin:0 auto 36px}
+.news h3{margin:0 0 6px;font-size:1.4rem}.news p{color:var(--mut);margin:0 0 18px}
+.fm{display:flex;max-width:480px;margin:auto;border:1px solid var(--line);border-radius:999px;padding:5px;background:var(--bg)}
+.fm input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);padding:0 16px;font:inherit}
+.fm input:focus-visible{outline:0}.fm:focus-within{outline:3px solid var(--red)}
+.fm .btn{padding:10px 20px}
+.msg{min-height:1.4em;font-size:.9rem;margin-top:10px;color:var(--red)}
+.fine{max-width:1100px;margin:auto;font-size:.85rem;opacity:.9}
+.fine p{margin:0 0 8px}
+@media(max-width:700px){nav{display:none}.screen{grid-template-columns:1fr}.side{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.btn{padding:12px 20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<a class="logo" href="#top"><span class="mark">ED</span>ELD Hub</a>
+<nav aria-label="Primary"><a href="#features">Features</a><a href="#roles">Roles</a><a href="#scope">MVP scope</a><a href="#plan">Delivery plan</a></nav>
+<a class="btn" href="#demo">Request a demo</a>
+</div></header>
+
+<main id="top">
+<div class="hero">
+<span class="pill">Fleet compliance workspace · MVP</span>
+<h1>Keep every driver record in one place. <em>Never miss a renewal.</em></h1>
+<p class="lead">Trucking Driver Compliance &amp; ELD Hub gives fleet and compliance teams one browser-based workspace for driver profiles, license expiry dates, hours-of-service audit records and DOT inspections.</p>
+<div class="cta"><a class="btn o" href="#features">See features</a><a class="btn" href="#demo">Request a demo</a></div>
+
+<div class="mock" role="img" aria-label="Sample dashboard showing driver totals and expiring licenses">
+<div class="dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+<div class="screen">
+<div class="side"><b>Dashboard</b><span>Drivers</span><span>HOS logs</span><span>Inspections</span></div>
+<div class="main"><h3>Dashboard</h3>
+<div class="kpis">
+<div class="kpi"><strong>48</strong><small>Total drivers</small></div>
+<div class="kpi"><strong>3</strong><small>Expired licenses</small></div>
+<div class="kpi"><strong>7</strong><small>Due in 30 days</small></div>
+<div class="kpi"><strong>12</strong><small>Open items</small></div>
+</div>
+<div class="tbl">
+<div class="row"><span>Driver</span><span>License expiry</span><span>Status</span></div>
+<div class="row"><span>Driver A</span><span>02 Oct 2026</span><span class="tag t-r">Expired</span></div>
+<div class="row"><span>Driver B</span><span>28 Oct 2026</span><span class="tag t-a">Due soon</span></div>
+<div class="row"><span>Driver C</span><span>14 Mar 2027</span><span class="tag t-g">Valid</span></div>
+</div>
+<p class="note">Sample data for illustration</p>
+</div></div></div>
+</div>
+
+<section class="alt" id="problem"><div class="wrap">
+<h2>Stop chasing records across spreadsheets</h2>
+<p class="sub">Driver credentials, renewal dates, HOS notes and inspection outcomes often live in separate files. That makes expiring licenses easy to miss and past inspections hard to find. The hub puts them side by side and shows what needs attention first.</p>
+</div></section>
+
+<section id="features"><div class="wrap">
+<h2>Everything you need to track driver compliance</h2>
+<p class="sub">Six focused modules that cover the first release of the product.</p>
+<div class="grid">
+<div class="f"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><h3>Compliance dashboard</h3><p>See total drivers, expired licenses, licenses due soon and records waiting for review at a glance.</p></div>
+<div class="f"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><h3>Driver management</h3><p>Create, edit and list driver profiles with validated required fields.</p></div>
+<div class="f"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg></div><h3>License renewal tracking</h3><p>Store each CDL number and expiry date. Status is calculated from the date, with a 30-day alert window you can change.</p></div>
+<div class="f"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>HOS audit logs</h3><p>Record event type, timestamps, notes and review status for each hours-of-service entry.</p></div>
+<div class="f"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div><h3>DOT inspection records</h3><p>Log date, driver, vehicle, result, notes and a document reference for every inspection.</p></div>
+<div class="f"><div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg></div><h3>Search and filters</h3><p>Find records by driver name, license number, status or expiry range.</p></div>
+</div></div></section>
+
+<section class="alt" id="roles"><div class="wrap">
+<h2>Built for the people who run compliance</h2>
+<p class="sub">Three roles, each with a clear job.</p>
+<div class="roles">
+<div class="role"><h3>Administrator</h3><p>Manages access and configuration, and can manage all application records.</p></div>
+<div class="role"><h3>Fleet manager</h3><p>Views and updates driver information, and monitors renewal and inspection status.</p></div>
+<div class="role"><h3>Compliance officer</h3><p>Reviews HOS records, maintains inspection details and follows up on flagged items.</p></div>
+</div></div></section>
+
+<section id="quality"><div class="wrap">
+<h2>Built to be reliable and easy to maintain</h2>
+<p class="sub">The engineering standards behind the first release.</p>
+<div class="stats">
+<div><strong>30 days</strong><b>Default renewal alert window</b><span>Configurable, so teams can warn earlier or later.</span></div>
+<div><strong>Tested</strong><b>React and Express</b><span>Component and API route tests, with CI checks on every change.</span></div>
+<div><strong>Accessible</strong><b>Keyboard and screen-reader ready</b><span>Labeled forms, visible focus and clear status text.</span></div>
+</div></div></section>
+
+<section class="alt" id="scope"><div class="wrap">
+<h2>What the first release covers</h2>
+<p class="sub">A practical MVP focused on record management and visibility.</p>
+<div class="scope">
+<div><h3>Included in the MVP</h3><ul><li>Dashboard summary and expiry alerts</li><li>Driver create, view, edit and list</li><li>Search and filters</li><li>HOS audit-log records</li><li>DOT inspection records</li><li>Validated API with clear error messages</li><li>API documentation and CI checks</li></ul></div>
+<div><h3>Not in the MVP</h3><ul><li>Certified ELD hardware or telematics integration</li><li>Automated regulatory filing</li><li>Guaranteed FMCSA/DOT compliance</li><li>Payroll, dispatch, routing, fuel and billing</li><li>Native iOS and Android apps</li></ul></div>
+</div></div></section>
+
+<section id="plan"><div class="wrap">
+<h2>Delivery plan</h2>
+<p class="sub">Five phases from scaffold to demo.</p>
+<ol class="phases">
+<li><div><b>Confirm and scaffold</b><span>Confirm requirements, database and roles. Set up frontend and backend.</span></div></li>
+<li><div><b>Driver feature</b><span>Driver list, detail, create and update, with API validation.</span></div></li>
+<li><div><b>Compliance records</b><span>License alerts, HOS logs, inspections and dashboard summary.</span></div></li>
+<li><div><b>Quality</b><span>Component and API tests, accessibility and performance review.</span></div></li>
+<li><div><b>Documentation and delivery</b><span>API docs, CI, staging deploy, feedback and demo.</span></div></li>
+</ol></div></section>
+
+<section class="alt" id="faq"><div class="wrap">
+<h2>Common questions</h2><p class="sub">&nbsp;</p>
+<div class="faq">
+<details><summary>Does this connect to ELD devices?</summary><p>Not in the first release. The hub stores and organizes records. It does not read data from certified ELD hardware or telematics providers.</p></details>
+<details><summary>Does it guarantee DOT or FMCSA compliance?</summary><p>No. It helps your team see and manage records. Legal compliance remains the responsibility of your organization.</p></details>
+<details><summary>How does license status work?</summary><p>Each driver has an expiry date. The system derives Expired, Due soon or Valid from that date, so status is never entered by hand.</p></details>
+<details><summary>Which database does it use?</summary><p>To be confirmed. The data model is designed to work with MongoDB, PostgreSQL or MySQL.</p></details>
+</div></div></section>
+</main>
+
+<footer id="demo">
+<div class="news">
+<h3>Request a demo</h3>
+<p>Leave your email and we will share the staging link when it is ready.</p>
+<form class="fm" id="f" novalidate>
+<label for="em" style="position:absolute;left:-9999px">Email address</label>
+<input id="em" type="email" placeholder="Enter your email" autocomplete="email">
+<button class="btn" type="submit">Request demo</button>
+</form>
+<div class="msg" id="msg" role="status" aria-live="polite"></div>
+</div>
+<div class="fine">
+<p><b>Trucking Driver Compliance &amp; ELD Hub</b> — a browser-based workspace for driver, license, HOS and inspection records.</p>
+<p>Draft product. This page describes the proposed MVP and does not constitute legal or regulatory advice.</p>
+</div>
+</footer>
+<script>
+document.getElementById('f').addEventListener('submit',function(e){
+e.preventDefault();var v=document.getElementById('em').value.trim(),m=document.getElementById('msg');
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){m.style.color='var(--red)';m.textContent='Enter a valid email address.';return}
+m.style.color='#166534';m.textContent='Thanks. We will be in touch.';
+});
+</script>
+</body>
+</html>
